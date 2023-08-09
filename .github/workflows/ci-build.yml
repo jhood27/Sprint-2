@@ -26,7 +26,22 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    container: python:3.9-slim
 
+    services:
+      postgres:
+        image: {image name here...}
+        ports:
+          - {port}:{port}
+      env:
+          POSTGRES_PASSWORD: {password here...}
+          POSTGRES_DB: {database name here...}
+          options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
